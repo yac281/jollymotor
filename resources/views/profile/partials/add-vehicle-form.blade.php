@@ -60,6 +60,49 @@
                     </div>
                     <x-input-error class="mt-2" :messages="$errors->get('year')" />
                 </div>
+                <hr>
+                <div class="md:flex items-center gap-10">
+                    <label class="md:w-32 text-right"> Anno </label>
+                    <div class="flex-1 max-md:mt-4">
+                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
+                    </div>
+                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
+                </div>
+                <div class="md:flex items-center gap-10">
+                    <label class="md:w-32 text-right"> Anno </label>
+                    <div class="flex-1 max-md:mt-4">
+                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
+                    </div>
+                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
+                </div>
+                <div class="md:flex items-center gap-10">
+                    <label class="md:w-32 text-right"> Anno </label>
+                    <div class="flex-1 max-md:mt-4">
+                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
+                    </div>
+                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
+                </div>
+                <div class="md:flex items-center gap-10">
+                    <label class="md:w-32 text-right"> Anno </label>
+                    <div class="flex-1 max-md:mt-4">
+                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
+                    </div>
+                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
+                </div>
+                <div class="md:flex items-center gap-10">
+                    <label class="md:w-32 text-right"> Anno </label>
+                    <div class="flex-1 max-md:mt-4">
+                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
+                    </div>
+                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
+                </div>
+                <div class="md:flex items-center gap-10">
+                    <label class="md:w-32 text-right"> Anno </label>
+                    <div class="flex-1 max-md:mt-4">
+                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
+                    </div>
+                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
+                </div>
                 
                 <textarea class="w-full !text-black placeholder:!text-black !bg-white !border-transparent focus:!border-transparent focus:!ring-transparent !font-normal !text-xl   dark:!text-white dark:placeholder:!text-white dark:!bg-slate-800" name="" id=""  rows="6" placeholder="What do you have in mind?"></textarea>
             </div>
