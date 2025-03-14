@@ -1,141 +1,176 @@
-<div class="bg-white rounded-xl shadow-sm p-4 space-y-4 text-sm font-medium border1 dark:bg-dark2">
-        
-    <div class="flex items-center gap-3">
-        <div class="flex-1 bg-slate-100 hover:bg-opacity-80 transition-all rounded-lg cursor-pointer dark:bg-dark3" uk-toggle="target: #create-vehicle"> 
-            <div class="py-2.5 text-center dark:text-white"> Aggiungi Veicolo </div>
+<section>
+    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+        @csrf
+    </form>
+
+    <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+        @csrf
+        @method('patch')
+
+        <div class="space-y-6">
+                <ul class="relative space-y-3 uk-accordion" uk-accordion="active: 0; multiple: true" "="">
+                    <li class="uk-open">
+                        <a class="flex items-center justify-between p-3 text-base bg-white shadow rounded-md text-black dark:text-white dark:bg-gray-800 group uk-accordion-title" href="#">
+                            Informazioni Generali
+                            <svg class="duration-200 group-aria-expanded:rotate-180 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </a>
+                        <div class="p-2 dark:text-white/80 uk-accordion-content">
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Tipo Veicolo </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <select id="type" name="type" class="bg-white shadow focus:!border-transparent focus:!ring-transparent max-sm:hidden md:w-40 dark:bg-dark2">
+                                        <option value="1">Auto</option> 
+                                        <option value="2">Moto</option>
+                                    </select>                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('type')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Brand </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="brand" name="brand" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="brand" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('brand')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Modello </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="model" name="model" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="model" />
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('model')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Anno </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('year')" />
+                            </div>               
+                        </div>
+                    </li>
+                    <li>
+                        <a class="flex items-center justify-between p-3 text-base bg-white shadow rounded-md text-black dark:text-white dark:bg-gray-800 group uk-accordion-title" href="#">
+                            Customizzazioni
+                            <svg class="duration-200 group-aria-expanded:rotate-180 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </a>
+                        <div class="p-2 dark:text-white/80 uk-accordion-content">
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Modifiche al motore </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="engine_mods" name="engine_mods" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="engine_mods" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('engine_mods')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Modifiche estetiche </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="body_mods" name="body_mods" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="body_mods" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('body_mods')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Modifiche alle sospensioni </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="suspension_mods" name="suspension_mods" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="suspension_mods" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('suspension_mods')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Tipo di cerchi e gomme </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="wheels" name="wheels" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="wheels" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('wheels')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Tipo di scarico </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="exhaust" name="exhaust" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="exhaust" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('exhaust')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Modifiche agli interni </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="interior_mods" name="interior_mods" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="interior_mods" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('interior_mods')" />
+                            </div>                        
+                        </div>
+                    </li>
+                    <li>
+                        <a class="flex items-center justify-between p-3 text-base bg-white shadow rounded-md text-black dark:text-white dark:bg-gray-800 group uk-accordion-title" href="#">
+                            Prestazioni
+                            <svg class="duration-200 group-aria-expanded:rotate-180 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </a>
+                        <div class="p-2 dark:text-white/80 uk-accordion-content">
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Cavalli </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="horsepower" name="horsepower" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="horsepower" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('horsepower')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Coppia in Nm </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="torque" name="torque" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="torque" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('torque')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Peso </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="weight" name="weight" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="weight" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('weight')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Velocità massima </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="top_speed" name="top_speed" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="top_speed" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('top_speed')" />
+                            </div>
+                            <br>
+                            <div class="md:flex items-center gap-10">
+                                <label class="md:w-32 text-right"> Accelerazione </label>
+                                <div class="flex-1 max-md:mt-4">
+                                    <x-text-input id="acceleration" name="acceleration" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="acceleration" />                    
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('acceleration')" />
+                            </div>                        
+                        </div>
+                    </li>
+                </ul> 
         </div>
-    </div>
-    
-</div>
 
-<!-- create vehicles -->
-<div class="hidden lg:p-20 uk- open" id="create-vehicle" uk-modal="">
-   
-   <div class="uk-modal-dialog tt relative overflow-hidden mx-auto bg-white shadow-xl rounded-lg md:w-[520px] w-full dark:bg-dark2">
+        <div class="flex items-center gap-4 mt-16 lg:pl-[10.5rem]">
+            <x-primary-button class="button lg:px-10 bg-primary text-white max-md:flex-1">{{ __('Save') }} <span class="ripple-overlay"></span></x-primary-button>
 
-       <div class="text-center py-4 border-b mb-0 dark:border-slate-700">
-           <h2 class="text-sm font-medium text-black"> Aggiungi Veicolo </h2>
-
-           <!-- close button -->
-           <button type="button" class="button-icon absolute top-0 right-0 m-2.5 uk-modal-close">
-               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-               </svg>
-           </button>
-
-       </div>
-       <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
-            @csrf
-            @method('patch')
-
-            <div class="space-y-5 mt-3 p-2">
-                <div class="md:flex items-center gap-10">
-                    <label class="md:w-32 text-right"> Tipo Veicolo </label>
-                    <div class="flex-1 max-md:mt-4">
-                        <select id="type" name="type" class="bg-white shadow focus:!border-transparent focus:!ring-transparent max-sm:hidden md:w-40 dark:bg-dark2">
-                            <option value="1">Auto</option> 
-                            <option value="2">Moto</option>
-                        </select>                    
-                    </div>
-                    <x-input-error class="mt-2" :messages="$errors->get('type')" />
-                </div>
-                <div class="md:flex items-center gap-10">
-                    <label class="md:w-32 text-right"> Brand </label>
-                    <div class="flex-1 max-md:mt-4">
-                        <x-text-input id="brand" name="brand" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="brand" />                    
-                    </div>
-                    <x-input-error class="mt-2" :messages="$errors->get('brand')" />
-                </div>
-                <div class="md:flex items-center gap-10">
-                    <label class="md:w-32 text-right"> Modello </label>
-                    <div class="flex-1 max-md:mt-4">
-                        <x-text-input id="model" name="model" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="model" />
-                    </div>
-                    <x-input-error class="mt-2" :messages="$errors->get('model')" />
-                </div>
-                <div class="md:flex items-center gap-10">
-                    <label class="md:w-32 text-right"> Anno </label>
-                    <div class="flex-1 max-md:mt-4">
-                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
-                    </div>
-                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
-                </div>
-                <hr>
-                <div class="md:flex items-center gap-10">
-                    <label class="md:w-32 text-right"> Anno </label>
-                    <div class="flex-1 max-md:mt-4">
-                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
-                    </div>
-                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
-                </div>
-                <div class="md:flex items-center gap-10">
-                    <label class="md:w-32 text-right"> Anno </label>
-                    <div class="flex-1 max-md:mt-4">
-                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
-                    </div>
-                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
-                </div>
-                <div class="md:flex items-center gap-10">
-                    <label class="md:w-32 text-right"> Anno </label>
-                    <div class="flex-1 max-md:mt-4">
-                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
-                    </div>
-                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
-                </div>
-                <div class="md:flex items-center gap-10">
-                    <label class="md:w-32 text-right"> Anno </label>
-                    <div class="flex-1 max-md:mt-4">
-                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
-                    </div>
-                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
-                </div>
-                <div class="md:flex items-center gap-10">
-                    <label class="md:w-32 text-right"> Anno </label>
-                    <div class="flex-1 max-md:mt-4">
-                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
-                    </div>
-                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
-                </div>
-                <div class="md:flex items-center gap-10">
-                    <label class="md:w-32 text-right"> Anno </label>
-                    <div class="flex-1 max-md:mt-4">
-                        <x-text-input id="year" name="year" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
-                    </div>
-                    <x-input-error class="mt-2" :messages="$errors->get('year')" />
-                </div>
-                
-                <textarea class="w-full !text-black placeholder:!text-black !bg-white !border-transparent focus:!border-transparent focus:!ring-transparent !font-normal !text-xl   dark:!text-white dark:placeholder:!text-white dark:!bg-slate-800" name="" id=""  rows="6" placeholder="What do you have in mind?"></textarea>
-            </div>
-
-            <div class="flex items-center gap-2 text-sm py-2 px-4 font-medium flex-wrap">
-                <button type="button" class="flex items-center gap-1.5 bg-sky-50 text-sky-600 rounded-full py-1 px-2 border-2 border-sky-100 dark:bg-sky-950 dark:border-sky-900">  
-                    <ion-icon name="image" class="text-base"></ion-icon>  
-                    Image 
-                </button>
-                <button type="button" class="flex items-center gap-1.5 bg-teal-50 text-teal-600 rounded-full py-1 px-2 border-2 border-teal-100 dark:bg-teal-950 dark:border-teal-900">  
-                    <ion-icon name="videocam" class="text-base"></ion-icon>  
-                    Video 
-                </button>
-                <button type="button" class="flex items-center gap-1.5 bg-orange-50 text-orange-600 rounded-full py-1 px-2 border-2 border-orange-100 dark:bg-yellow-950 dark:border-yellow-900">  
-                    <ion-icon name="happy" class="text-base"></ion-icon>  
-                    Feeling
-                </button>
-                <button type="button" class="flex items-center gap-1.5 bg-red-50 text-red-600 rounded-full py-1 px-2 border-2 border-rose-100 dark:bg-rose-950 dark:border-rose-900">  
-                    <ion-icon name="location" class="text-base"></ion-icon>  
-                    Check in 
-                </button>
-                <button type="button" class="grid place-items-center w-8 h-8 text-xl rounded-full bg-secondery">  
-                    <ion-icon name="ellipsis-horizontal"></ion-icon>
-                </button>
-            </div>
-
-            <div class="p-5 flex justify-between items-center">
-                <div class="flex items-center gap-2"> 
-                    <button type="button" class="button bg-blue-500 text-white py-2 px-12 text-[14px]"> Create</button>
-                </div>
-            </div>
-        </form>
-   
-   </div>
-
-</div>
+            @if (session('status') === 'profile-updated')
+                <p
+                    x-data="{ show: true }"
+                    x-show="show"
+                    x-transition
+                    x-init="setTimeout(() => show = false, 2000)"
+                    class="text-sm text-gray-600 dark:text-gray-400"
+                >{{ __('Saved.') }}</p>
+            @endif
+        </div>
+    </form>
+</section>

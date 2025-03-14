@@ -32,6 +32,16 @@ class ProfileController extends Controller
     }
 
     /**
+     * Display the user's profile form.
+     */
+    public function addVehicle(Request $request): View
+    {
+        return view('profile.add-vehicle', [
+            'user' => $request->user(),
+        ]);
+    }
+
+    /**
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
