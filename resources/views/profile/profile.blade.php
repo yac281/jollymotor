@@ -1,7 +1,7 @@
 <x-app-layout :user="$user">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
+            {{ __('Profilo') }}
         </h2>
     </x-slot>
 
@@ -45,7 +45,7 @@
                                 uk-switcher="connect: #setting_tab ; animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium"> 
                                 
                                 <li class="w-auto pr-2.5"> <a href="#" class="inline-block py-3 leading-8 px-3.5">Feed</a> </li>
-                                <li class="w-auto pr-2.5"> <a href="#" class="inline-block py-3 leading-8 px-3.5">Custom <span class="text-xs pl-2 font-normal lg:inline-block hidden">2,680</span></a> </li>
+                                <li class="w-auto pr-2.5"> <a href="#" class="inline-block py-3 leading-8 px-3.5">Custom <span class="text-xs pl-2 font-normal lg:inline-block hidden">{{$customVehicles->count()}}</span></a> </li>
                                 <li class="w-auto pr-2.5"> <a href="#" class="inline-block py-3 leading-8 px-3.5">Crew</a> </li> 
                             </ul>
                         </nav>
@@ -88,7 +88,32 @@
                         </div>
                         
                         <div>
-                            @include('profile.partials.add-vehicle-form')
+                            <div class="flex items-center justify-between text-black dark:text-white py-3 mt-6">
+                                <h3 class="text-xl font-semibold"> Custom </h3>
+                                <a href="{{route('profile.vehicle.add')}}" class="text-sm text-blue-500">Aggiungi veicolo</a>
+                            </div>   
+                            <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-2.5 mt-4">
+
+                                @foreach($customVehicles as $vehicle)
+                                    <div class="card">
+                                        <a href="timeline-event.html">
+                                            <div class="card-media h-32">
+                                                <img src="assets/images/events/img-1.jpg" alt="">
+                                                <div class="card-overly"></div>
+                                            </div>
+                                        </a>
+                                        <div class="card-body">
+                                            <a href="timeline-event.html"><h4 class="card-title text-sm">{{$vehicle->brand}} {{$vehicle->model}}</h4> </a>
+                                            <a href="#"> <p class="card-text text-black mt-2"> {{$vehicle->year}} </p> </a>
+                                            <div class="flex gap-2">
+                                                @if($vehicle->user->id === $user->id)
+                                                <a href="{{route('profile.vehicle.edit', $vehicle->id)}}"class="button bg-primary text-white flex-1">  {{ __('Modifica') }}</a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>   
                         </div>
 
                         <div>

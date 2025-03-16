@@ -1,9 +1,9 @@
 <section>
-
-    <form method="post" action="{{ route('profile.vehicle.save') }}" enctype="multipart/form-data">
+    <form method="post" action="{{route('profile.vehicle.update', $vehicle->id)}}" enctype="multipart/form-data">
         @csrf
-        @method('post')
+        @method('put')
         <x-text-input id="user_id" name="user_id" type="hidden" value="{{$user->id}}" required autocomplete="user_id" />                    
+        <x-text-input id="vehicle_id" name="vehicle_id" type="hidden" value="{{$vehicle->id}}" required autocomplete="vehicle_id" />                    
 
         <div class="space-y-6">
                 <ul class="relative space-y-3 uk-accordion" uk-accordion="active: 0; multiple: true" "="">
@@ -28,7 +28,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Brand </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="brand" name="brand" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="brand" />                    
+                                    <x-text-input id="brand" name="brand" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="brand" :value="old('brand', $vehicle->brand)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('brand')" />
                             </div>
@@ -36,7 +36,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Modello </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="model" name="model" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="model" />
+                                    <x-text-input id="model" name="model" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="model" :value="old('model', $vehicle->model)" />
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('model')" />
                             </div>
@@ -44,7 +44,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Anno </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="year" name="year" type="number" step=0.01 class="lg:w-1/2 w-full" required autofocus autocomplete="year" />                    
+                                    <x-text-input id="year" name="year" type="number" step=0.01 class="lg:w-1/2 w-full" required autofocus autocomplete="year" :value="old('year', $vehicle->year)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('year')" />
                             </div>               
@@ -60,7 +60,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Modifiche al motore </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="engine_mods" name="engine_mods" type="text" class="w-full" required autofocus autocomplete="engine_mods" />                    
+                                    <x-text-input id="engine_mods" name="engine_mods" type="text" class="w-full" required autofocus autocomplete="engine_mods" :value="old('engine_mods', $vehicle->engine_mods)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('engine_mods')" />
                             </div>
@@ -68,7 +68,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Modifiche estetiche </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="body_mods" name="body_mods" type="text" class="w-full" required autofocus autocomplete="body_mods" />                    
+                                    <x-text-input id="body_mods" name="body_mods" type="text" class="w-full" required autofocus autocomplete="body_mods" :value="old('body_mods', $vehicle->body_mods)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('body_mods')" />
                             </div>
@@ -76,7 +76,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Modifiche alle sospensioni </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="suspension_mods" name="suspension_mods" type="text" class="w-full" required autofocus autocomplete="suspension_mods" />                    
+                                    <x-text-input id="suspension_mods" name="suspension_mods" type="text" class="w-full" required autofocus autocomplete="suspension_mods" :value="old('suspension_mods', $vehicle->suspension_mods)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('suspension_mods')" />
                             </div>
@@ -84,7 +84,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Tipo di cerchi e gomme </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="wheels" name="wheels" type="text" class="w-full" required autofocus autocomplete="wheels" />                    
+                                    <x-text-input id="wheels" name="wheels" type="text" class="w-full" required autofocus autocomplete="wheels" :value="old('wheels', $vehicle->wheels)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('wheels')" />
                             </div>
@@ -92,7 +92,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Tipo di scarico </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="exhaust" name="exhaust" type="text" class="w-full" required autofocus autocomplete="exhaust" />                    
+                                    <x-text-input id="exhaust" name="exhaust" type="text" class="w-full" required autofocus autocomplete="exhaust" :value="old('exhaust', $vehicle->exhaust)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('exhaust')" />
                             </div>
@@ -100,7 +100,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Modifiche agli interni </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="interior_mods" name="interior_mods" type="text" class="w-full" required autofocus autocomplete="interior_mods" />                    
+                                    <x-text-input id="interior_mods" name="interior_mods" type="text" class="w-full" required autofocus autocomplete="interior_mods" :value="old('interior_mods', $vehicle->interior_mods)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('interior_mods')" />
                             </div>                        
@@ -116,7 +116,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Cavalli </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="horsepower" name="horsepower" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="horsepower" />                    
+                                    <x-text-input id="horsepower" name="horsepower" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="horsepower" :value="old('horsepower', $vehicle->horsepower)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('horsepower')" />
                             </div>
@@ -124,7 +124,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Coppia (Nm) </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="torque" name="torque" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="torque" />                    
+                                    <x-text-input id="torque" name="torque" type="text" class="lg:w-1/2 w-full" required autofocus autocomplete="torque" :value="old('torque', $vehicle->torque)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('torque')" />
                             </div>
@@ -132,7 +132,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Peso (Kg) </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="weight" name="weight" type="number" step=0.01 class="lg:w-1/2 w-full" required autofocus autocomplete="weight" />                    
+                                    <x-text-input id="weight" name="weight" type="number" step=0.01 class="lg:w-1/2 w-full" required autofocus autocomplete="weight" :value="old('weight', $vehicle->weight)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('weight')" />
                             </div>
@@ -140,7 +140,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Velocità massima (Km/h) </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="top_speed" name="top_speed" type="number" step=1 class="lg:w-1/2 w-full" required autofocus autocomplete="top_speed" />                    
+                                    <x-text-input id="top_speed" name="top_speed" type="number" step=1 class="lg:w-1/2 w-full" required autofocus autocomplete="top_speed" :value="old('top_speed', $vehicle->top_speed)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('top_speed')" />
                             </div>
@@ -148,7 +148,7 @@
                             <div class="md:flex items-center gap-10">
                                 <label class="md:w-32 text-right"> Accelerazione (s) </label>
                                 <div class="flex-1 max-md:mt-4">
-                                    <x-text-input id="acceleration" name="acceleration" type="number" step=0.01 class="lg:w-1/2 w-full" required autofocus autocomplete="acceleration" />                    
+                                    <x-text-input id="acceleration" name="acceleration" type="number" step=0.01 class="lg:w-1/2 w-full" required autofocus autocomplete="acceleration" :value="old('acceleration', $vehicle->acceleration)" />                    
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('acceleration')" />
                             </div>                        
@@ -159,16 +159,6 @@
 
         <div class="flex items-center gap-4 mt-16 lg:pl-[10.5rem]">
             <x-primary-button class="button lg:px-10 bg-primary text-white max-md:flex-1">{{ __('Save') }} <span class="ripple-overlay"></span></x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
-            @endif
         </div>
     </form>
 </section>

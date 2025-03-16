@@ -25,7 +25,12 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.view');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile/add-vehicle', [ProfileController::class, 'addVehicle'])->name('profile.add_vehicle');
+    
+    Route::get('/profile/vehicle/add', [CustomVehicleController::class, 'addVehicle'])->name('profile.vehicle.add');
+    Route::get('/profile/vehicle/edit/{vehicle}', [CustomVehicleController::class, 'editVehicle'])->name('profile.vehicle.edit');
+    Route::post('/profile/vehicle/save', [CustomVehicleController::class, 'saveVehicle'])->name('profile.vehicle.save');
+    Route::put('/profile/vehicle/update/{vehicle}', [CustomVehicleController::class, 'updateVehicle'])->name('profile.vehicle.update');
+
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
