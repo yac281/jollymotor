@@ -51,10 +51,12 @@
                                         
                                             <ul class="uk-slider-items grid-small" uk-scrollspy="target: > li; cls: uk-animation-scale-up , uk-animation-slide-right-small; delay: 20 ;repeat: true">
                                                 <li class="w-28" uk-scrollspy-class="uk-animation-fade">
-                                                    <div class="p-3 px-4 rounded-lg bg-teal-100/60 text-teal-600 dark:text-white dark:bg-dark4">
-                                                        <ion-icon name="car" class="text-2xl drop-shadow-md"></ion-icon>
-                                                        <div class="mt-1.5 text-sm font-medium"> Veicolo </div>
-                                                    </div>
+                                                    <a href="{{route('profile.vehicle.add')}}">
+                                                        <div class="p-3 px-4 rounded-lg bg-teal-100/60 text-teal-600 dark:text-white dark:bg-dark4">
+                                                            <ion-icon name="car" class="text-2xl drop-shadow-md"></ion-icon>
+                                                            <div class="mt-1.5 text-sm font-medium"> Veicolo </div>
+                                                        </div>
+                                                    </a>
                                                 </li>   
                                                 <li class="w-28">
                                                     <div class="p-3 px-4 rounded-lg bg-sky-100/60 text-sky-600 dark:text-white dark:bg-dark4">

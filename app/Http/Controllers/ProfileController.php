@@ -16,8 +16,11 @@ class ProfileController extends Controller
      */
     public function profile(Request $request): View
     {
+        $user = $request->user();
+        $userVehicles = $user->customVehicles;
         return view('profile.profile', [
-            'user' => $request->user(),
+            'user' => $user,
+            'customVehicles' => $userVehicles
         ]);
     }
 
@@ -27,16 +30,6 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
-
-    /**
-     * Display the user's profile form.
-     */
-    public function addVehicle(Request $request): View
-    {
-        return view('profile.add-vehicle', [
             'user' => $request->user(),
         ]);
     }
